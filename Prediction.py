@@ -34,3 +34,5 @@ plt.figure(figsize=(10, 6))  # Adjust the width and height as needed
 
 sns.boxplot(x="variable", y="value", data=pd.melt(data))
 plt.show()
+
+st.pyplot(plt.gcf())
