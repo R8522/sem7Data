@@ -1,3 +1,6 @@
+steamlit
+pandas
+numpy
 seaborn
 matplotlib
 sklearn
