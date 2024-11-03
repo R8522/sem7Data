@@ -20,6 +20,7 @@ dframe = pd.DataFrame(df)
 dframe.drop(['encounter_id', 'patient_id', 'hospital_id', 'icu_id', 'icu_type', 'icu_admit_source', 'icu_stay_type', 'icu_type' ], axis=1,)
 
 dframe.isna().sum()
+dframe.duplicated().sum()
 
 # IDENTIFY OUTLIERS
 #col = ['pre_icu_los_days', 'apache_4a_hospital_death_prob', 'apache_4a_icu_death_prob', 'hospital_death']
