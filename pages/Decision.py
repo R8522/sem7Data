@@ -35,3 +35,38 @@ sns.boxplot(x="variable", y="value", data=pd.melt(data))
 plt.show()
 
 st.pyplot(plt.gcf())
+
+# distributing the dataset into two components X and Y
+X = data.drop(columns = ['hospital_death'])
+y = data['hospital_death']
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 5)
+
+#performing preprocessing part
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+
+# Fitting Logistic Regression To the training set
+from sklearn.linear_model import LogisticRegression
+
+classifier = LogisticRegression(random_state = 5)
+classifier.fit(X_train, y_train)
+
+selected_columns = ['pre_icu_los_days', 'apache_4a_hospital_death_prob', 'apache_4a_icu_death_prob', 'hospital_death']
+
+# Set up subplots for features
+fig, axes = plt.subplots(nrows=len(selected_columns), ncols=1, figsize=(10, 6 * len(selected_columns)))
+
+# Plot count distribution for each feature
+for i, feature in enumerate(selected_columns):
+    sns.countplot(x=feature, data=df, ax=axes[i])
+    axes[i].set_title(f'Distribution of {feature}')
+
+plt.tight_layout()
+plt.show()
+
+st.pyplot(plt.gcf())
